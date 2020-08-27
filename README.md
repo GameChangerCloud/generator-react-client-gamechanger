@@ -41,7 +41,7 @@ npx create-react-app <your-app-name> <path/to/graphql/schema.graphql>
 ````
 Generate the final project with yeoman
 ````
-cd <your-app-name> && yo react-redux-graphql
+cd <your-app-name> && yo react-client-gamechanger
 ````
 
 Now we need to do some setup to connect our client app to the AWS cloud services.
@@ -98,7 +98,7 @@ If the field is an Int it will allow only numbers
 ## Deployment
 Using S3 and CloudFront, you can deploy your app to make it available globally through an URL. We also use the [react-deploy-cli](https://github.com/sumn2u/react-deploy-cli) module to perform the deployment.
 
-Initialise the cloud structure
+Initialize the cloud structure
 ````
 cd terraform 
 ````
