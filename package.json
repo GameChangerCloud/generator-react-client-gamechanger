@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.ippon.fr/jratsimandresy/generator-react-redux-graphql.git"
+    "url": "https://github.com/GameChangerCloud/generator-react-client-gamechanger.git"
   },
   "keywords": [
     "yeoman-generator"
