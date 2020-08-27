@@ -1,0 +1,13 @@
+{
+	"region": "eu-west-1",
+	"userPool": "",
+	"userPoolBaseUri": "",
+	"clientId": "",
+	"callbackUri": "",
+	"signoutUri": "",
+	"tokenScopes": [
+			"openid",
+			"email",
+			"profile"                
+	]
+}
