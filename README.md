@@ -37,11 +37,11 @@ Not available yet
 ## Usage
 Generate your React application
 ````
-npx create-react-app <your-app-name> <path/to/graphql/schema.graphql>
+npx create-react-app <your-app-name> 
 ````
 Generate the final project with yeoman
 ````
-cd <your-app-name> && yo react-client-gamechanger
+cd <your-app-name> && yo react-client-gamechanger <path/to/graphql/schema.graphql>
 ````
 
 Now we need to do some setup to connect our client app to the AWS cloud services.
