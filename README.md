@@ -30,8 +30,9 @@ npm link
 ```
 
 ### Using npm 
-Not available yet
-
+```
+npm install -g generator-react-client-gamechanger
+```
 
 
 ## Usage
