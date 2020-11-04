@@ -5,6 +5,7 @@ import { <%-typeNameLower%>Delete, <%-typeNameLower%>Load } from '../actions'
 // mapStateToProps : used to descripbe how to transform the current Redux store state into the props to pass to the presentional component
 const mapStateToProps = state => {
   return {
+    isLoading: state.isLoading,
     <%-typeNameLowerPlural%>: state.<%-typeNamePlural%>
   }
 }

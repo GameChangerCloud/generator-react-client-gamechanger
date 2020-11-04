@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const <%-typeNamePlural%>List = ({<%-typeNameLowerPlural%>, onDelete, onLoad}) => {
+const <%-typeNamePlural%>List = ({<%-typeNameLowerPlural%>, onDelete, onLoad, isLoading}) => {
 		const history = useHistory();
 		const styles = {
 			marginTop: "20px",
@@ -32,7 +32,9 @@ const <%-typeNamePlural%>List = ({<%-typeNameLowerPlural%>, onDelete, onLoad}) =
 
 		useEffect(() => {
 			console.log('mount it!');
-			onLoad()
+			if(!isLoading){ //Prevent loading when there's already an action (create, update, delete) occuring
+				onLoad()
+			}
 	}, []);
 
 		const handleUpdate = (rowData) => {
