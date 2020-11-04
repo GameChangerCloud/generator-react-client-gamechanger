@@ -72,9 +72,13 @@ const getActionsCreators = (typesName, scalarsName) => {
 
 			s += "/* " + typeName + " */\n\n"
 
-			s += "export const " + typeNameLowerCase + "LoadRequest = () => ({ type: Actions." + typeNameUpperCase + "_LOAD_REQUEST })\n"
-			s += "export const " + typeNameLowerCase + "LoadSuccess = (" + typeNamePlural + ") => ({ type: Actions." + typeNameUpperCase + "_LOAD_SUCCESS, payload: " + typeNamePlural + " })\n"
-			s += "export const " + typeNameLowerCase + "LoadFailure = (error) => ({ type: Actions." + typeNameUpperCase + "_LOAD_FAILURE, err: true, payload: error})\n"
+			s += "export const " + typeNameLowerCase + "LoadRequest = () => ({ type: Actions.ALL_" + typeNameUpperCase + "_LOAD_REQUEST })\n"
+			s += "export const " + typeNameLowerCase + "LoadSuccess = (" + typeNamePlural + ") => ({ type: Actions.ALL_" + typeNameUpperCase + "_LOAD_SUCCESS, payload: " + typeNamePlural + " })\n"
+			s += "export const " + typeNameLowerCase + "LoadFailure = (error) => ({ type: Actions.ALL_" + typeNameUpperCase + "_LOAD_FAILURE, err: true, payload: error})\n"
+
+			s += "export const " + typeNameLowerCase + "LoadByIdRequest = () => ({ type: Actions." + typeNameUpperCase + "_LOAD_REQUEST })\n"
+			s += "export const " + typeNameLowerCase + "LoadByIdSuccess = (" + typeNamePlural + ") => ({ type: Actions." + typeNameUpperCase + "_LOAD_SUCCESS, payload: " + typeNamePlural + " })\n"
+			s += "export const " + typeNameLowerCase + "LoadByIdFailure = (error) => ({ type: Actions." + typeNameUpperCase + "_LOAD_FAILURE, err: true, payload: error})\n"
 
 			s += "export const " + typeNameLowerCase + "AddRequest = (" + typeNameLowerCase + ") => ({ type: Actions." + typeNameUpperCase + "_ADD_REQUEST, payload: " + typeNameLowerCase + " })\n"
 			s += "export const " + typeNameLowerCase + "AddSuccess = (" + typeNamePlural + ") => ({ type: Actions." + typeNameUpperCase + "_ADD_SUCCESS, payload: " + typeNamePlural + " })\n"
@@ -115,6 +119,36 @@ const getActionsCreators = (typesName, scalarsName) => {
 			})
 			.catch(err => {
 				dispatch(` + typeNameLowerCase + `LoadFailure(err))
+			})
+		
+		}
+		`
+		s += `export const ` + typeNameLowerCase + `LoadById = (id) => dispatch => {
+
+			// Flag : we're loading
+			dispatch(` + typeNameLowerCase + `LoadByIdRequest())
+		
+			const params = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + store.getState().session.credentials.idToken },
+				body: JSON.stringify({
+					query: utils.constructQuery(Queries.GET_BY_ID, "` + typeName + `", id)
+				})
+			}
+		
+			// Now we do the actual loading 
+			fetch(APIurl, params)
+			.then(res => res.json())
+			.then(payload => {
+				if(payload.errors)
+					dispatch(` + typeNameLowerCase + `LoadById																											Failure(payload.errors))
+				else if(payload.errorMessage)
+					dispatch(` + typeNameLowerCase + `LoadById																											Failure(payload.errorMessage))
+				else
+					dispatch(` + typeNameLowerCase + `LoadById																											Success(payload))
+			})
+			.catch(err => {
+				dispatch(` + typeNameLowerCase + `LoadById																											Failure(err))
 			})
 		
 		}

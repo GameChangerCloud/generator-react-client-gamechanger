@@ -5,5 +5,6 @@ export const GET_ALL = "GET_ALL"
 export const UPDATE = "UPDATE"
 export const ADD = "ADD"
 export const DELETE = "DELETE"
+export const GET_BY_ID = "GET_BY_ID"
 
 <%-constantsQueries%>

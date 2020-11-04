@@ -10,6 +10,9 @@ export const constructQuery = (queryType, entityType, params = null) => {
 		case Queries.GET_ALL:
 			return Queries.getAll<%-typeName%>
 
+		case Queries.GET_BY_ID:
+			return Queries.get<%-typeName%>byId(params)
+
 			case Queries.ADD:
 			return Queries.create<%-typeName%>(params)
 
