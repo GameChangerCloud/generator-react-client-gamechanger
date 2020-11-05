@@ -141,14 +141,14 @@ const getActionsCreators = (typesName, scalarsName) => {
 			.then(res => res.json())
 			.then(payload => {
 				if(payload.errors)
-					dispatch(` + typeNameLowerCase + `LoadById																											Failure(payload.errors))
+					dispatch(` + typeNameLowerCase + `LoadByIdFailure(payload.errors))
 				else if(payload.errorMessage)
-					dispatch(` + typeNameLowerCase + `LoadById																											Failure(payload.errorMessage))
+					dispatch(` + typeNameLowerCase + `LoadByIdFailure(payload.errorMessage))
 				else
-					dispatch(` + typeNameLowerCase + `LoadById																											Success(payload))
+					dispatch(` + typeNameLowerCase + `LoadByIdSuccess(payload))
 			})
 			.catch(err => {
-				dispatch(` + typeNameLowerCase + `LoadById																											Failure(err))
+				dispatch(` + typeNameLowerCase + `LoadByIdFailure(err))
 			})
 		
 		}
