@@ -24,6 +24,7 @@ export const rootReducer = (state = initialState, action) => {
 
 	switch (type) {
 		<%entitiesName.forEach(entityName => {%><%if(!scalarsName.includes(entityName)){%>
+			case Actions.ALL_<%-entityName.toUpperCase()%>_LOAD_REQUEST:
 			case Actions.<%-entityName.toUpperCase()%>_LOAD_REQUEST:
 			case Actions.<%-entityName.toUpperCase()%>_ADD_REQUEST:
 			case Actions.<%-entityName.toUpperCase()%>_UPDATE_REQUEST:
@@ -40,6 +41,7 @@ export const rootReducer = (state = initialState, action) => {
 				isLoading: true
 			}
 		<%entitiesName.forEach(entityName => {%><%if(!scalarsName.includes(entityName)){%>
+		case Actions.ALL_<%-entityName.toUpperCase()%>_LOAD_SUCCESS:
 		case Actions.<%-entityName.toUpperCase()%>_LOAD_SUCCESS:
 		case Actions.<%-entityName.toUpperCase()%>_DELETE_SUCCESS:
 		case Actions.<%-entityName.toUpperCase()%>_ADD_SUCCESS:

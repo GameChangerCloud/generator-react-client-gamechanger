@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const <%-typeNameLower%>Reducer = (state = [], type, payload) => {
 	switch (type) {
-		case Actions.<%-typeName.toUpperCase()%>_LOAD_SUCCESS: {
+		case Actions.ALL_<%-typeName.toUpperCase()%>_LOAD_SUCCESS: {
 			let newState = payload.data.<%-typeNameLowerPlural%>.map(<%-typeNameLower%> => <%-typeNameLower%>)
 			toast.dismiss(toastIdLoad)
 			toast.success("Data loaded", {toastId: toastIdDone})
