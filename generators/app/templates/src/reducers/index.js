@@ -53,6 +53,7 @@ export const rootReducer = (state = initialState, action) => {
 			}<%}%><%})%>
 
 		<%entitiesName.forEach(entityName => {%><%if(!scalarsName.includes(entityName)){%>
+			case Actions.ALL_<%-entityName.toUpperCase()%>_LOAD_FAILURE:
 			case Actions.<%-entityName.toUpperCase()%>_LOAD_FAILURE:
 			case Actions.<%-entityName.toUpperCase()%>_DELETE_FAILURE:
 			case Actions.<%-entityName.toUpperCase()%>_ADD_FAILURE:
