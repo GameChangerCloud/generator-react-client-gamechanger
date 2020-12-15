@@ -44,6 +44,9 @@ Generate the final project with yeoman
 ````
 cd <your-app-name> && yo react-client-gamechanger <path/to/graphql/schema.graphql>
 ````
+````
+npm install
+````
 
 Now we need to do some setup to connect our client app to the AWS cloud services.
 
