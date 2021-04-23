@@ -1,9 +1,9 @@
 variable "bucket_name_production" {
-  type    = "string"
+  type    = string
   default = "<%-appName%>-production"
 }
 variable "bucket_name_staging" {
-  type    = "string"
+  type    = string
   default = "<%-appName%>-staging"
 }
 
@@ -11,6 +11,7 @@ variable "bucket_name_staging" {
 resource "aws_s3_bucket" "production" {
   bucket = var.bucket_name_production
   acl    = "public-read"
+  force_destroy = true
 
   website {
     index_document = "index.html"
@@ -20,6 +21,7 @@ resource "aws_s3_bucket" "production" {
 resource "aws_s3_bucket" "staging" {
   bucket = var.bucket_name_staging
   acl    = "public-read"
+  force_destroy = true
 
   website {
     index_document = "index.html"
@@ -184,11 +186,13 @@ resource "aws_cloudfront_distribution" "s3_distribution_staging" {
 resource "null_resource" "getIDS" {
   provisioner "local-exec" {
     command = "echo 'PRODUCTION_DISTRIBUTION : ${aws_cloudfront_distribution.s3_distribution_production.id}\nSTAGING_DISTRIBUTION : ${aws_cloudfront_distribution.s3_distribution_staging.id} ' >> ids.txt"
+    interpreter = ["bash", "-c"]
   }
 }
 
 resource "null_resource" "getURLs" {
   provisioner "local-exec" {
     command = "echo '\n\nURL_PRODUCTION : ${aws_cloudfront_distribution.s3_distribution_production.domain_name}\nURL_STAGING : ${aws_cloudfront_distribution.s3_distribution_staging.domain_name} ' >> ids.txt"
+    interpreter = ["bash", "-c"]
   }
 }

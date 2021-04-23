@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {APIurl} from '../constants'
-import cognitoUtils from '../lib/cognitoUtils'
 import {toast} from "react-toastify";
 
 const endpoint = APIurl

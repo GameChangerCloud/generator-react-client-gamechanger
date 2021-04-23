@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { Route, Redirect, Link as RouterLink, BrowserRouter as Router } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import { Route, Redirect, BrowserRouter as Router } from 'react-router-dom'
 import { Button } from '@material-ui/core';
-import { ToastContainer } from 'react-toastify'
-import { store, persistor } from './store/configureStore'
 import './index.css';
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from "react-bootstrap/Dropdown";

@@ -1,15 +1,9 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { ValidatorForm, TextValidator, SelectValidator } from 'react-material-ui-form-validator';
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import MenuItem from "@material-ui/core/MenuItem";
-import {Calendar} from "react-calendar";
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { ChromePicker } from 'react-color';
 
 class Create<%-typeName%> extends Component{
     constructor(props) {
