@@ -258,7 +258,9 @@ module.exports = class extends Generator {
 						typeNameLowerPlural: lowerPluralName,
 						typeNameLower: lowerName,
 						typeNamePlural: pluralName,
-						stateFieldRelation: parsing.getStateFieldRelation(currentType, this.scalars)
+						currentType: currentType,
+						scalars: this.scalars,
+						pluralize: pluralize
 					}
 				)
 
@@ -271,7 +273,9 @@ module.exports = class extends Generator {
 						typeNameLowerPlural: lowerPluralName,
 						typeNameLower: lowerName,
 						typeNamePlural: pluralName,
-						stateFieldRelation: parsing.getStateFieldRelation(currentType, this.scalars)
+						currentType: currentType,
+						scalars: this.scalars,
+						pluralize: pluralize
 					}
 				)
 

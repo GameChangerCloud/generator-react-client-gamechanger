@@ -5,7 +5,7 @@ import { <%-typeNameLower%>Add } from '../actions'
 // mapStateToProps : used to descripbe how to transform the current Redux store state into the props to pass to the presentional component
 const mapStateToProps = state => {
     return {
-        <%-stateFieldRelation%>
+        <%- include('../partials/stateFieldRelation.ejs',{currentType: currentType, scalars: scalars, pluralize: pluralize}) %>
         // <%-typeNameLowerPlural%>: state.<%-typeNamePlural%>
     }
 }

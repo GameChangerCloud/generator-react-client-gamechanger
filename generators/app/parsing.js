@@ -800,16 +800,6 @@ const getTypeFromName = (typeName, typesName, types) => {
 	return type
 }
 
-const getStateFieldRelation = (type, scalarsName) => {
-	let s = ""
-	type.fields.forEach(field => {
-		if (field.type !== "ID" && field.type !== "String" && field.type !== "Int" && field.type !== "Boolean" && !scalarsName.includes(field.type)) {
-			s += pluralize.plural(field.type.toLowerCase()) + ": state." + pluralize.plural(field.type) + ","
-		}
-	})
-	return s.substring(0, s.lastIndexOf(','))
-}
-
 module.exports = {
 	getAllTypes: getAllTypes,
 	getAllTypesName: getAllTypesName,
@@ -829,6 +819,5 @@ module.exports = {
 	getCheckBooleanFields: getCheckBooleanFields,
 	getGraphqlSchema: getGraphqlSchema,
 	getEndpointURL: getEndpointURL,
-	getStateFieldRelation: getStateFieldRelation
 
 }

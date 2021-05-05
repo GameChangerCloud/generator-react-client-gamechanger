@@ -4,7 +4,7 @@ import {<%-typeNameLower%>Update} from '../actions'
 
 const mapStateToProps = state => {
     return {
-        <%-stateFieldRelation%>
+        <%- include('../partials/stateFieldRelation.ejs',{currentType: currentType, scalars: scalars, pluralize: pluralize}) %>
         // employes: state.Employes
     }
 }

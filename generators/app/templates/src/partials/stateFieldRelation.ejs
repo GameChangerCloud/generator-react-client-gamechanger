@@ -1,0 +1,5 @@
+<%_ currentType.fields.forEach(field => { _%>
+    <%_ if (field.type !== "ID" && field.type !== "String" && field.type !== "Int" && field.type !== "Boolean" && !scalars.includes(field.type)) { _%>
+<%- pluralize.plural(field.type.toLowerCase()) %>: state.<%- pluralize.plural(field.type) %>,
+    <% } _%>
+<% }) _%>
