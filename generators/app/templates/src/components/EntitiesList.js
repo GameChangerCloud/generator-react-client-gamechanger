@@ -59,7 +59,7 @@ const <%-typeNamePlural%>List = ({<%-typeNameLowerPlural%>, onDelete, onLoad, is
 			<br/>
 			<br/>
 			<MaterialTable
-						columns={[ <%-columns%> ]}
+						columns={[ <%- include('../partials/columnsForTable.ejs',{type: currentType, scalars: scalars, inflection: inflection}) %> ]}
 	          data={<%-typeNameLowerPlural%>}
 						title="List of <%-typeName%>"
 						actions={[

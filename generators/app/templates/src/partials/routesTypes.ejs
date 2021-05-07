@@ -1,0 +1,9 @@
+<%_ typesName.forEach(typeName => { %>
+    <%_ if(!scalars.includes(typeName)) { _%>
+        <%_ let currentTypeName = typeName _%>
+        <%_ let pluralName = pluralize.plural(currentTypeName) _%>
+          <PrivateRoute path="/<%- pluralName %>" isLoggedIn={this.props.isLoggedIn} component={Connect<%- pluralName %>List} />
+          <PrivateRoute path="/Create<%- currentTypeName %>" isLoggedIn={this.props.isLoggedIn} component={ConnectCreate<%- currentTypeName %>} />
+          <PrivateRoute path="/Update<%- currentTypeName %>" isLoggedIn={this.props.isLoggedIn} component={ConnectUpdate<%- currentTypeName %>} />
+    <%_ } _%>
+<%_ }) _%>

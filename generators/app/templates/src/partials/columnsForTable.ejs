@@ -1,0 +1,29 @@
+<% let s = '' _%>
+	<%_ type.fields.forEach(field => { _%>
+		<%_ s += '{title: "' + inflection.capitalize(field.name) + '", field: "' + field.name _%>
+		<%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalars.includes(field.type)) { _%>
+			<%_ switch(field.type) {
+				case "Boolean": _%>
+				<%_ s += '", type: \'boolean\' }, ' _%>
+				<%_ break
+
+				case "Date":
+				case "DateTime":
+				case "Time": _%>
+				<%_ s += '", render: rowData => {if(rowData.' + field.name + ') return new Date(rowData.' + field.name + ').toString()}}, ' _%>
+				<%_ break
+
+				default: _%>
+					<%_ s += '" }, ' _%>
+					<%_ break
+			}
+		}
+		else { _%>
+			<%_ if (field.isArray) { _%>
+				<%_ s += '", render: rowData => constructArrayOfId(rowData.' + field.name + ') }, ' _%>
+			<%_ } else { _%>
+				<%_ s += '", render: rowData => {if(rowData.' + field.name + ' && rowData.' + field.name + '.id) return rowData.' + field.name + '.id }}, ' _%>
+			<%_ }
+		}
+	}) _%>
+<%- s.substring(0, s.lastIndexOf(', ')) _%>

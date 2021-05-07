@@ -11,7 +11,8 @@ import { clearSession } from './actions/session'
 import cognitoUtils from './lib/cognitoUtils'
 import Callback from './components/Callback';
 
-<%-routerImports %>
+<%- include('./partials/routerImports.ejs',{typesName: typesName, scalars: scalars, pluralize: pluralize}) %>
+
 
 
 const mapStateToProps = state => {
@@ -68,7 +69,7 @@ class App extends Component {
 				</Nav.Link>
             </Nav.Item>
             <NavDropdown id="nav-dropdown" title="Models">
-              <%-linksTypes%>
+          <%- include('./partials/linksTypes.ejs',{typesName: typesName, scalars: scalars, pluralize: pluralize}) %>
 
 			</NavDropdown>
       {this.props.isLoggedIn
@@ -83,7 +84,7 @@ class App extends Component {
           <PrivateRoute path="/Tables" isLoggedIn={this.props.isLoggedIn} component={AppHTTP} />
           <Route path="/callback" component={Callback} />
 
-          <%-routesTypes%>
+          <%- include('./partials/routesTypes.ejs',{typesName: typesName, scalars: scalars, pluralize: pluralize}) %>
     </div>
       </Router>
     )

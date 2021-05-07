@@ -1,0 +1,20 @@
+<% type.fields.forEach(field => { _%>
+	<%_ if (field.type !== "ID" && field.type !== "String" && field.type !== "Int" && field.type !== "Boolean" && !scalars.includes(field.type)) { // Temporary, until we deal with relationship _%>
+		<%_ if (field.isArray) { _%>
+const Balise<%- field.name %> = (props) => (
+			<label>
+				<input
+					type="checkbox"
+					name="<%- field.name %>"
+					value={props.value}
+					checked={this.isPresent(props.value, "<%- field.name %>")}
+					onChange={props.onChange}
+				/>
+				{props.name}
+
+				<br/>
+			</label>
+		);
+		<%_ } _%>
+	<%_ } _%>
+<%_ }) _%>

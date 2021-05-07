@@ -1,0 +1,12 @@
+<% typesName.forEach(typeName => { _%>
+    <%_ if(!scalars.includes(typeName) ) { _%>
+        <%_ let currentTypeName = typeName _%>
+        <%_ let pluralName = pluralize.plural(currentTypeName) _%>
+import Connect<%- pluralName %>List from './containers/Connect<%- pluralName %>List'
+import ConnectCreate<%- typeName %> from './containers/ConnectCreate<%- typeName %>'
+import ConnectUpdate<%- typeName %> from './containers/ConnectUpdate<%- typeName %>'
+    <%_ } _%>
+<% }) _%>
+import AppHTTP from "./components/Table"
+import ConnectHome from "./containers/ConnectHome"
+import ConnectCallback from "./components/Callback"

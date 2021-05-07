@@ -31,7 +31,8 @@ function Home({onLoad, isLoggedIn, history}) {
     <br/>
     <br/>
 
-    <%-graphqlSchema%>
+    <%- include('../partials/graphqlSchema.ejs',{schema: schema}) %>
+
 
     </div>
 );

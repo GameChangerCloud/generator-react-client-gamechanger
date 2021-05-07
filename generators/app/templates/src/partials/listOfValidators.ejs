@@ -1,0 +1,96 @@
+<%_ type.fields.forEach(field => { _%>
+    <%_ let help = "" _%>
+    <%_ if (field.noNull) { _%>
+        <%_ help = 'helperText="Not null"\n' _%>
+    <%_ } _%>
+    <%_ help += include('./utils/validatorsError.ejs',{field: field}) _%>
+    <%_ if(field.type !== "ID"){ _%>
+    <%_ if (field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalars.includes(field.type)) { _%>
+        <%_ switch(field.type) { 
+            case "Boolean": _%>
+                <br/>
+        <%- field.name %> :
+            <%_ if (field.noNull) { _%>
+                (Not null)
+            <%_ } _%>
+        <br/>
+        <RadioGroup aria-label="<%- field.name %>" name="<%- field.name %>" value={this.state.<%- field.name %>} onChange={e => this.handleChange(e)}>
+            <FormControlLabel value={true} control={<Radio />} label="True" checked={this.state.<%- field.name %>} />
+            <FormControlLabel value={false} control={<Radio />} label="False" checked={!this.state.<%-field.name %>}/>
+        </RadioGroup>
+                <%_ break;
+            
+            case "Date": 
+            case "DateTime":
+            case "Time": _%>
+            <p><b><%- field.name %> : {this.state.<%- field.name%> ? this.formatDate(this.state.<%- field.name %>) : 'pick a date'}</b></p>
+
+            <Calendar
+                onChange={e => this.onChangeDate(e, "<%- field.name %>") }
+                value={this.state.${field.name} ? new Date(this.state.<%- field.name %>) : null}
+            />
+            <br/>
+                <%_ break
+
+            case "HexColorCode":
+            case "RGB":
+            case "RGBA":
+            case "HSL":
+            case "HSLA": _%>
+                <p><b><%- field.name %></b></p>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                <ChromePicker
+                    color={this.state.${field.name}}
+                    onChange = {(e) => this.onChangeColor(e, "<%- field.name %>", "<%- field.type %>")}
+                />
+                </div>
+                <br/>
+                <%_ break
+
+            default: _%>
+                <TextValidator
+                    onChange={this.handleChange}
+                    label="<%- field.name %>"
+                    name="<%- field.name %>"
+                    <%- help %>
+                    value={this.state.<%- field.name %>}
+                    style={{ width: 500 }}
+                />
+                <br/>
+                <%_ break
+        } _%>
+    <%_ } else { _%>
+        <%_ if (field.isArray) { _%>
+            <%- field.name %> : <% if (field.noNull) { _%>
+                (Not null)
+            <% } _%>
+
+            <br/>
+            <div className="choose">
+                {this.getAll<%- field.name %>().map(item=>(
+                    <div>
+                    <Balise<%- field.name %>
+                    value={item.value}
+                    key={item.key}
+                    name={item.name}
+                    onChange={this.handleChange}
+                    />
+                    </div>
+                    )
+                )}
+            </div>
+        <% } else { _%>
+            <SelectValidator
+                onChange={this.handleChange}
+                label="<%- field.name %>"
+                name="<%- field.name %>"
+                value={this.state.<%- field.name %>}
+                <%- help %>
+                style={{ width: 500 }}
+            >
+                {this.getAll<%- field.name %>().map((field, id) => <option key={id} value={field.id}>{field.id}</option>)}
+            </SelectValidator>
+        <%_ } _%>
+    <%_ } _%>
+    <%_ } _%>
+<% }) _%>

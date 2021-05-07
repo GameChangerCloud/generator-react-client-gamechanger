@@ -1,0 +1,9 @@
+<% currentType.fields.forEach(field => { _%>
+    <%_ if (field.type !== "String" && field.type !== "Int" && field.type !== "Boolean" && field.type !== "ID" && !scalars.includes(field.type)) { _%>
+        <%_ if (field.isArray) { _%>
+        , <%- field.name %>: this.props.location.state.<%- field.name %> ? this.props.location.state.<%- field.name %>.map(element => element.id) : []
+        <%_ } else { _%>
+        , <%- field.name %>: this.props.location.state.<%- field.name %> ? this.props.location.state.<%- field.name %>.id : null
+        <%_ } _%>
+    <%_ } _%>
+<% }) _%>

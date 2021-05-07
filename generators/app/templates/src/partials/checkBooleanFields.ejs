@@ -1,0 +1,10 @@
+<% let s = "" _%>
+<% type.fields.forEach(field => { _%>
+    <%_ if (field.type === "Boolean") { _%>
+        <%_ s += 'e.target.name === "' + field.name + '" ||' _%>
+    <%_ } _%>
+<% }) _%>
+<% if (s === "") { _%>
+false<% } else { _%>
+<%- s.substring(0, s.length - 2) %>
+<% } _%>

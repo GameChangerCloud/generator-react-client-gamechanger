@@ -1,0 +1,12 @@
+<% if (field.name.toLowerCase().includes('mail')) { _%>
+'isEmail' ,, 'You need to put a valid email : myemail@example.fr'<% } else { _%>
+<% if (field.name.toLowerCase().includes('lastname')	|| field.name.toLowerCase().includes('firstname')) { _%>
+'matchRegexp:^[a-zA-Z]+$' ,, 'You need to put a valid name : only alphabet'<% } else { _%>
+<% if (field.name.toLowerCase().includes('login') || field.name.toLowerCase().includes('username')) { _%>
+'matchRegexp:^[a-zA-Z0-9_\.-]+$' ,, 'You need to put a valid username : alphanumerics, "_", "-", "."'<% } else { _%>
+<% if (field.type === 'Int') { _%>
+'matchRegexp:^[0-9]+$' ,, 'You must put a number'
+<% } _%>
+<% } _%>
+<% } _%>
+<% } _%>

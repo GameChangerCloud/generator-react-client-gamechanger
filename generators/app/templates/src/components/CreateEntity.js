@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator, SelectValidator } from 'react-material-ui-form-validator';
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,7 +10,7 @@ class Create<%-typeName%> extends Component{
         super(props)
         this.state = {
             id: this.props.location.state.id ? this.props.location.state.id : 0,
-            <%-initFieldsState%>
+    <%- include('../partials/initFieldsState.ejs',{type: currentType, scalars: scalars}) _%>
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,7 +47,7 @@ class Create<%-typeName%> extends Component{
 
     handleChange(e){
         let change = {}
-        if(<%-checkArrayFields%>){
+        if(<%- include('../partials/checkArrayFields.ejs',{type: currentType, scalars: scalars}) _%>){
             let tmp = this.state[e.target.name]
             const index = tmp.indexOf(e.target.value);
             if(index > -1){
@@ -59,7 +59,7 @@ class Create<%-typeName%> extends Component{
             change[e.target.name] = tmp
         }
         else {
-            if(<%-checkBooleanFields%>){
+            if(<%- include('../partials/checkBooleanFields.ejs',{type: currentType}) _%>){
                 change[e.target.name] = e.target.value === 'true';
             }
             else{
@@ -99,12 +99,10 @@ class Create<%-typeName%> extends Component{
         return [year, month, day].join('-');
     }
 
-
-    <%-initOtherEntities%>
+    <%- include('../partials/initOtherEntities.ejs',{type: currentType, scalars: scalars}) _%>
 
     render() {
-    <%-baliseForMultipleSelect%>
-
+        <%- include('../partials/baliseForMultipleSelect.ejs',{type: currentType, scalars: scalars}) _%>
 
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
@@ -116,7 +114,8 @@ class Create<%-typeName%> extends Component{
         ref="form"
         onSubmit={this.handleSubmit}
             >
-            <%-listOfValidators%>
+            <%- include('../partials/listOfValidators.ejs',{type: currentType, scalars: scalars}) _%>
+
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: 15 }}>Create</Button>
         </ValidatorForm>
         </div>

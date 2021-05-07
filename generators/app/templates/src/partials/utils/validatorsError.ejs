@@ -1,0 +1,26 @@
+<% let validator = '[' _%>
+<% let errors = '[' _%>
+<% if(field.noNull){ _%>
+    <%_ validator += "'required', " _%>
+    <%_ errors += "'this field is required', " _%>
+<% } _%>
+<% let valid_err = include('./parseNameField.ejs',{field: field}) _%>
+<%_ if(valid_err !== "") {  _%>
+<% valid_err = valid_err.split(',,') _%>
+    <%_ validator += valid_err[0] _%>
+    <%_ errors += valid_err[1] _%>
+<% } else{ _%>
+    <%_ if(validator.includes(',')) { _%>
+        <% validator = validator.substring(0, validator.lastIndexOf(',')) _%>
+    <% } _%>
+    <% if(errors.includes(',')){ _%>
+        <% errors = errors.substring(0, errors.lastIndexOf(',')) _%>
+    <% } _%>
+<% } _%>
+<% validator += "]" _%>
+<% errors += "]" _%>
+<% if(validator === '[]'){ _%>
+<% } else { _%>
+validators={<%- validator %>}
+errorMessages={<%- errors %>}
+<% } _%>

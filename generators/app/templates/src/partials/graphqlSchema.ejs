@@ -1,0 +1,5 @@
+<% schema = schema.replace(/{/g, '{"{"}') _%>
+<% let tab = schema.split("\n") _%>
+<% for (let i = 0; i < tab.length; i++) { _%>
+    <br/> <%- tab[i] %>
+<%_ } %>

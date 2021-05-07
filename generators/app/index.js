@@ -199,7 +199,9 @@ module.exports = class extends Generator {
 						typeName: currentTypeName,
 						typeNameLowerPlural: lowerPluralName,
 						typeNamePlural: pluralName,
-						columns: parsing.getColumnsForTable(currentType, this.scalars)
+						currentType: currentType, 
+						scalars: this.scalars,
+						inflection: inflection,
 					}
 				)
 
@@ -209,14 +211,10 @@ module.exports = class extends Generator {
 					this.destinationPath('src/components/Create' + currentTypeName + '.js'),
 					{
 						typeName: currentTypeName,
-						initFieldsState: parsing.getInitFieldsState(currentType, this.scalars),
 						typeNamePlural: pluralName,
-						listOfValidators: parsing.getListOfValidators(currentType, this.scalars),
-						initOtherEntities: parsing.getInitOtherEntities(currentType, this.scalars),
-						baliseForMultipleSelect: parsing.getBaliseForMultipleSelect(currentType, this.scalars),
-						checkArrayFields: parsing.getCheckArrayFields(currentType, this.scalars),
-						checkBooleanFields: parsing.getCheckBooleanFields(currentType)
-
+						currentType: currentType, 
+						scalars: this.scalars,
+						pluralize: pluralize,
 					}
 				)
 
@@ -227,14 +225,9 @@ module.exports = class extends Generator {
 					{
 						typeName: currentTypeName,
 						typeNamePlural: pluralName,
-						relationsFields: parsing.getRelationsFields(currentType, this.scalars),
-						listOfValidators: parsing.getListOfValidators(currentType, this.scalars),
-						initOtherEntities: parsing.getInitOtherEntities(currentType, this.scalars),
-						baliseForMultipleSelect: parsing.getBaliseForMultipleSelect(currentType, this.scalars),
-						checkArrayFields: parsing.getCheckArrayFields(currentType, this.scalars),
-						checkBooleanFields: parsing.getCheckBooleanFields(currentType)
-
-
+						currentType: currentType, 
+						scalars: this.scalars,
+						pluralize: pluralize,
 					}
 				)
 
@@ -305,8 +298,7 @@ module.exports = class extends Generator {
 			this.templatePath('src/components/Home.js'),
 			this.destinationPath('src/components/Home.js'),
 			{
-				endpointURL: parsing.getEndpointURL(),
-				graphqlSchema: parsing.getGraphqlSchema(this.schema)
+				schema: this.schema,
 			}
 		)
 
@@ -359,9 +351,9 @@ module.exports = class extends Generator {
 			this.templatePath('src/App.js'),
 			this.destinationPath('src/App.js'),
 			{
-				routerImports: parsing.getRouterImports(this.typesName, this.scalars),
-				linksTypes: parsing.getLinksForTypes(this.typesName, this.scalars),
-				routesTypes: parsing.getRoutesForTypes(this.typesName, this.scalars)
+				typesName : this.typesName,
+				scalars: this.scalars,
+				pluralize: pluralize,
 			}
 		)
 

@@ -1,0 +1,9 @@
+<% let type _%>
+<% for (let index = 0; index < typesName.length; index++) { _%>
+    <% if (typesName[index] === typeName) { _%>
+        <% type = types[index] _%>
+        <% break
+    } _%>
+<% } _%>
+<%- type _%>
+

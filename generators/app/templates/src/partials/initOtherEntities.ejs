@@ -1,0 +1,24 @@
+<% type.fields.forEach(field => { _%>
+    <%_ if (field.type !== "ID" && field.type !== "String" && field.type !== "Int" && field.type !== "Boolean" && !scalars.includes(field.type)) { _%>
+        <%_ if (field.isArray) { _%>
+getAll<%- field.name %>(){
+        // TODO Get request
+        return this.props.<%- pluralize.plural(field.type.toLowerCase()) %> ? this.props.<%- pluralize.plural(field.type.toLowerCase()) %>.map(element => {
+            return {...element, value: element.id, key: element.id, name: element.id}
+        }) : []
+        // return  [
+        // { value: 'ValueA', key: 'KeyA', name: 'Name A' },
+        // { value: 'ValueB', key: 'KeyB', name: 'Name B' },
+        // { value: 'ValueC', key: 'KeyC', name: 'Name C' }
+        // ];
+    }
+        <%_ } else { _%>
+getAll<%- field.name %>(){
+        // TODO Get request
+        return this.props.<%- pluralize.plural(field.type.toLowerCase()) %> ? this.props.<%- pluralize.plural(field.type.toLowerCase()) %> : []
+        // return  [
+        // "Choix 1", "Choix 2", "Choix 3"];
+    }
+        <%_ } _%>
+    <% } _%>
+<% }) _%>
