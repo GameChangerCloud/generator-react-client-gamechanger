@@ -7,4 +7,4 @@ export const ADD = "ADD"
 export const DELETE = "DELETE"
 export const GET_BY_ID = "GET_BY_ID"
 
-<%-constantsQueries%>
+<%- include('../partials/constantsQueries.ejs',{typesName:typesName, types:types, scalarsName:scalars, pluralize: pluralize}) %>

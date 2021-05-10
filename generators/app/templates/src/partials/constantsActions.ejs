@@ -1,0 +1,33 @@
+<%_ typesName.forEach(typeName => { _%>
+    <%_ if (!scalarsName.includes(typeName)) { _%>
+        <%_ let typeNameParsed = typeName.toUpperCase() _%>
+
+/* <%- typeName %> */
+
+// Singular fetch
+export const <%- typeNameParsed %>_LOAD_REQUEST = '<%- typeNameParsed %>_LOAD_REQUEST'
+export const <%- typeNameParsed %>_LOAD_SUCCESS = '<%- typeNameParsed %>_LOAD_SUCCESS'
+export const <%- typeNameParsed %>_LOAD_FAILURE = '<%- typeNameParsed %>_LOAD_FAILURE'
+
+// All fetch
+export const ALL_<%- typeNameParsed %>_LOAD_REQUEST = 'ALL_<%- typeNameParsed %>_LOAD_REQUEST'
+export const ALL_<%- typeNameParsed %>_LOAD_SUCCESS = 'ALL_<%- typeNameParsed %>_LOAD_SUCCESS'
+export const ALL_<%- typeNameParsed %>_LOAD_FAILURE = 'ALL_<%- typeNameParsed %>_LOAD_FAILURE'
+
+// Singular add
+export const <%- typeNameParsed %>_ADD_REQUEST = '<%- typeNameParsed %>_ADD_REQUEST'
+export const <%- typeNameParsed %>_ADD_SUCCESS = '<%- typeNameParsed %>_ADD_SUCCESS'
+export const <%- typeNameParsed %>_ADD_FAILURE = '<%- typeNameParsed %>_ADD_FAILURE'
+
+// Singular update
+export const <%- typeNameParsed %>_UPDATE_REQUEST = '<%- typeNameParsed %>_UPDATE_REQUEST'
+export const <%- typeNameParsed %>_UPDATE_SUCCESS = '<%- typeNameParsed %>_UPDATE_SUCCESS'
+export const <%- typeNameParsed %>_UPDATE_FAILURE = '<%- typeNameParsed %>_UPDATE_FAILURE'
+
+// Singular delete
+export const <%- typeNameParsed %>_DELETE_REQUEST = '<%- typeNameParsed %>_DELETE_REQUEST'
+export const <%- typeNameParsed %>_DELETE_SUCCESS = '<%- typeNameParsed %>_DELETE_SUCCESS'
+export const <%- typeNameParsed %>_DELETE_FAILURE = '<%- typeNameParsed %>_DELETE_FAILURE'
+    <%_ } _%>
+
+<%_ }) _%>

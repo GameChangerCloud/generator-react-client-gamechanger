@@ -1,0 +1,76 @@
+<%_ for (let index = 0; index < typesName.length; index++) { _%>
+    <%_ if (!scalarsName.includes(typesName[index])) { _%>
+        <%_ let typeNameLowerCase = typesName[index].toLowerCase() _%>
+        <%_ let typeNameUpperCase = typesName[index].toUpperCase() _%>
+        <%_ let typeNamePlural = pluralize.plural(typeNameLowerCase) _%>
+        <%_ let fields = types[index].fields _%>
+
+<%# Get all _%>
+export const getAll<%- typesName[index] _%> = "{<%- typeNamePlural _%> { <%_ fields.forEach(field => { _%>
+            <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { %> <%- field.name _%> 
+            <%_ } else { %> <%- field.name_%>{id} <%_ } _%>
+        <%_ }) _%> }}"
+
+<%# Get by id _%>
+export const get<%- typesName[index] _%>byId = (id) => "{<%- typeNameLowerCase _%>(id: "+id+") { <%_ fields.forEach(field => { _%>
+            <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { %> <%- field.name _%>
+            <%_ } else { %> <%- field.name _%>{id} <%_ } _%>
+        <%_ }) _%> }}"
+
+<%# Create _%>
+export const create<%- typesName[index] _%> = (<%- typeNameLowerCase _%>) => { <%_ fields.forEach(field => { _%>
+            <%_ if (field.type !== "ID" && field.type !== "String" && field.type !== "Int" && field.type !== "Boolean" && field.isArray) { _%> <%_ let childType = include('./utils/typeFromName.ejs',{typeName: field.type, typesName: typesName, types: types}) %> 
+        let all<%- field.name _%> = ""
+        <%- typeNameLowerCase _%>.<%- field.name _%>.forEach(element => {
+            all<%- field.name _%> += element + ", "
+        })
+            <%_ } _%>
+        <%_ }) %> 
+        return "mutation {<%- typeNameLowerCase _%>Create( <%_ fields.forEach(field => { _%>
+            <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { _%>    
+                <%_ if (field.type === "String") { _%> <%- field.name _%>: \"" + <%- typeNameLowerCase _%>.<%- field.name _%>+ "\", <%_ } else { _%>
+                    <%_ if(field.type === "DateTime") { _%> <%- field.name _%>: \"" + (<%- typeNameLowerCase _%>.<%- field.name _%> ? new Date(<%- typeNameLowerCase _%>.<%- field.name _%>).toISOString(): null) + "\", 
+                    <%_ } else { _%> <%- field.name _%>: " + <%- typeNameLowerCase  _%>.<%- field.name _%> + ", <%_ } _%>
+                <%_ } _%> 
+            <%_ } else { _%>
+                <%_ if (field.isArray) { _%> <%- field.name _%>: ["+all<%- field.name _%>+"], <%_ } else { _%> 
+                <%- field.name _%>: " + (<%- typeNameLowerCase _%>.<%- field.name _%> ? <%- typeNameLowerCase _%>.<%- field.name _%>: null) + ", <%_ } _%>
+            <%_ } _%> 
+        <%_ }) _%> ) { <% fields.forEach(field => { _%>
+            <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { %> <%- field.name _%> 
+            <%_ } else { %> <%- field.name _%>{id} <%_ } _%>
+        <%_ }) _%> }}"
+}
+
+<%# Update _%>
+export const update<%- typesName[index] _%> = (<%- typeNameLowerCase _%>) => { <%_ fields.forEach(field => { _%>
+            <%_ if (field.type !== "ID" && field.type !== "String" && field.type !== "Int" && field.type !== "Boolean" && field.isArray) { _%> <%_ let childType = include('./utils/typeFromName.ejs',{typeName: field.type, typesName: typesName, types: types}) %> 
+        let all<%- field.name _%> = ""
+        <%- typeNameLowerCase _%>.<%- field.name _%>.forEach(element => {
+            if(element.id){ all<%- field.name _%> += element.id + ", "}
+            else {all<%- field.name _%> += element + ", "}
+        }) <%_ } _%>
+        <%_ }) %> 
+        return "mutation {<%- typeNameLowerCase _%>Update( <%_ fields.forEach(field => { _%>
+            <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { _%>
+                <%_ if (field.type === "String") { _%>  <%- field.name _%>: \"" + <%- typeNameLowerCase _%>.<%- field.name _%> + "\", <%_ } else { _%>
+                    <%_ if(field.type === "DateTime") { _%> <%- field.name _%>: \"" + (<%- typeNameLowerCase _%>.<%- field.name _%> ? new Date(<%- typeNameLowerCase _%>.<%- field.name _%>).toISOString(): null) + "\",
+                    <%_ } else { _%> <%- field.name _%>: " + <%- typeNameLowerCase _%>.<%- field.name _%> + ", <%_ } _%>
+                <%_ } _%>
+            <%_ } else { _%>
+                <%_ if (field.isArray) { _%> <%- field.name _%>: [" + all<%- field.name _%> + "], <%_ } else { _%>
+                    <%- field.name _%>: " + (<%- typeNameLowerCase _%>.<%- field.name _%> ? <%- typeNameLowerCase _%>.<%- field.name _%>: null) + ", <%_ } _%>
+            <%_ } _%>
+        <%_ }) _%> ) { <% fields.forEach(field => { _%>
+            <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { %> <%- field.name _%>
+            <%_ } else { %> <%- field.name _%>{id} <%_ } _%>
+        <%_ }) _%> }}"
+}
+
+<%# Delete _%>
+export const delete<%- typesName[index] _%> = (id) => "mutation{<%- typeNameLowerCase _%>Delete(id: " + id + ") { <% fields.forEach(field => { _%>
+            <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { %> <%- field.name _%>
+            <%_ } else { %> <%- field.name _%>{id} <%_ } _%>
+        <%_ }) _%> }}"
+    <%_ } _%>
+<%_ } _%>

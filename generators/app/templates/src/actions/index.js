@@ -5,4 +5,4 @@ import { Actions, APIurl, Queries } from '../constants'
 import * as utils from '../utils'
 import {store} from '../store/configureStore'
 
-<%-actionsCreators%>
+<%- include('../partials/actionsCreators.ejs',{typesName:typesName, scalarsName:scalarsName}) %>

@@ -123,7 +123,8 @@ module.exports = class extends Generator {
 			this.templatePath('src/constants/actions.js'),
 			this.destinationPath('src/constants/actions.js'),
 			{
-				constantsActions: parsing.getConstantsActions(this.typesName, this.scalars)
+				typesName: this.typesName,
+				scalarsName: this.scalars
 			}
 		)
 
@@ -132,7 +133,10 @@ module.exports = class extends Generator {
 			this.templatePath('src/constants/queries.js'),
 			this.destinationPath('src/constants/queries.js'),
 			{
-				constantsQueries: parsing.getConstantsQueries(this.typesName, this.types, this.scalars)
+				typesName:this.typesName,
+				types: this.types,
+				scalars: this.scalars,
+				pluralize: pluralize
 			}
 		)
 
@@ -153,7 +157,9 @@ module.exports = class extends Generator {
 			this.templatePath('src/actions/index.js'),
 			this.destinationPath('src/actions/index.js'),
 			{
-				actionsCreators: parsing.getActionsCreators(this.typesName, this.scalars),
+				typesName: this.typesName,
+				scalarsName: this.scalars,
+				pluralize: pluralize
 			}
 		)
 
