@@ -2,6 +2,6 @@
     <%_ if(!scalars.includes(typeName)) { _%>
         <%_ let currentTypeName = typeName _%>
         <%_ let pluralName = pluralize.plural(currentTypeName) _%>
-        <LinkContainer to="/<%- pluralName %>"><Dropdown.Item><% pluralName %></Dropdown.Item></LinkContainer>
+        <LinkContainer to="/<%- pluralName %>"><Dropdown.Item><%- pluralName %></Dropdown.Item></LinkContainer>
     <%_ } _%>
 <%_ }) _%>
