@@ -111,7 +111,7 @@ class Update<%-typeName%> extends Component{
         ref="form"
         onSubmit={this.handleSubmit}
             >
-            <%- include('../partials/listOfValidators.ejs',{type: currentType, scalars: scalars}) _%>
+            <%- include('../partials/listOfValidators.ejs',{type: currentType, scalars: scalars, types: types, directives: directives}) _%>
 
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: 15 }}>Update</Button>
         </ValidatorForm>

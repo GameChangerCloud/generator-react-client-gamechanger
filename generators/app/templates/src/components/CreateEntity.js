@@ -5,6 +5,8 @@ import { ValidatorForm, TextValidator, SelectValidator } from 'react-material-ui
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+const directiveResolvers = require('../utils/<%= typeName.toLowerCase() %>DirectiveResolvers')
+
 class Create<%-typeName%> extends Component{
     constructor(props) {
         super(props)
@@ -17,6 +19,12 @@ class Create<%-typeName%> extends Component{
         this.onAdd = this.props.onAdd.bind(this);
 
 
+    }
+
+    getAllFieldNames(){
+        return [<% fields.forEach(field => {%> "<%-field.name%>", <%}); %>]
+            
+        
     }
 
     onChangeDate(e, name) {
@@ -101,6 +109,7 @@ class Create<%-typeName%> extends Component{
 
     <%- include('../partials/initOtherEntities.ejs',{type: currentType, scalars: scalars}) _%>
 
+    
     render() {
         <%- include('../partials/baliseForMultipleSelect.ejs',{type: currentType, scalars: scalars}) _%>
 
@@ -114,8 +123,8 @@ class Create<%-typeName%> extends Component{
         ref="form"
         onSubmit={this.handleSubmit}
             >
-            <%- include('../partials/listOfValidators.ejs',{type: currentType, scalars: scalars}) _%>
-
+            
+            <%- include('../partials/listOfValidators.ejs',{type: currentType, scalars: scalars, types: types, directives: directives}) _%>
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: 15 }}>Create</Button>
         </ValidatorForm>
         </div>
