@@ -200,6 +200,7 @@ module.exports = class extends Generator {
 			let fields = parsing.getFields(currentType)
 
 			let directiveNames = parsing.getFieldsDirectiveNames(fields , this.types[index])
+			let schemaDirectives = parsing.getschemaDirectivesNames()
 
 
 			if (currentTypeName !== "Query" && currentTypeName !== "Mutation" && !this.scalars.includes(currentTypeName)) {
@@ -308,7 +309,9 @@ module.exports = class extends Generator {
 					this.templatePath('src/utils/directiveResolvers.js'),
 					this.destinationPath('src/utils/' + currentTypeName.toLocaleLowerCase() + 'DirectiveResolvers.js'),
 					{
-						dirNames : directiveNames
+						dirNames : directiveNames,
+						schemaDirectives : schemaDirectives
+
 					}
 				)
 
