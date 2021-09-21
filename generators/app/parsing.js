@@ -1,5 +1,6 @@
 const pluralize = require('pluralize')
 const inflection = require('inflection')
+const schemaDirectives = require('./templates/src/utils/schemaDirectives')
 
 const getAllTypes = (schemaJSON) => {
 	let types = []
@@ -53,9 +54,20 @@ const getFieldsDirectiveNames = (fields, typeObject) =>{
     return directiveNames
 }
 
+// get directives present in schema
+const getschemaDirectivesNames = () =>{
+    names = []
+    for( elem in schemaDirectives.directives ){
+        names.push(elem)
+    }
+    console.log(names)
+    return names
+}
+
 module.exports = {
 	getAllTypes: getAllTypes,
 	getAllTypesName: getAllTypesName,
 	getFields : getFields,
-	getFieldsDirectiveNames: getFieldsDirectiveNames
+	getFieldsDirectiveNames: getFieldsDirectiveNames,
+    getschemaDirectivesNames : getschemaDirectivesNames
 }
