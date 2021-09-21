@@ -1,10 +1,11 @@
 const Generator = require('yeoman-generator');
 const pluralize = require('pluralize')
 const parsing = require('./parsing')
-const easygraphqlSchemaParser = require('easygraphql-parser')
+const easygraphqlSchemaParser = require('easygraphql-parser-gamechanger')
 const inflection = require('inflection')
 const fs = require('fs')
 const constants = require('./constants');
+const directives = require('./templates/src/utils/schemaDirectives')
 
 const isFileSync = (aFile) => {
 	try {
@@ -195,6 +196,12 @@ module.exports = class extends Generator {
 			let pluralName = pluralize.plural(currentTypeName)
 			let lowerPluralName = pluralize.plural(lowerName)
 
+			// Fetch all the fields for one type
+			let fields = parsing.getFields(currentType)
+
+			let directiveNames = parsing.getFieldsDirectiveNames(fields , this.types[index])
+
+
 			if (currentTypeName !== "Query" && currentTypeName !== "Mutation" && !this.scalars.includes(currentTypeName)) {
 
 				// components/<typeNameClassPlural>List.js
@@ -221,6 +228,10 @@ module.exports = class extends Generator {
 						currentType: currentType, 
 						scalars: this.scalars,
 						pluralize: pluralize,
+						directiveNames : directiveNames,
+						fields : fields,
+						types : this.types,
+						directives: directives
 					}
 				)
 
@@ -234,6 +245,10 @@ module.exports = class extends Generator {
 						currentType: currentType, 
 						scalars: this.scalars,
 						pluralize: pluralize,
+						directiveNames : directiveNames,
+						fields : fields,
+						types : this.types,
+						directives: directives
 					}
 				)
 
@@ -286,6 +301,14 @@ module.exports = class extends Generator {
 						typeName: currentTypeName,
 						typeNameLowerPlural: lowerPluralName,
 						typeNameLower: lowerName,
+					}
+				)
+				//Adding DirectiveResolvers
+				this.fs.copyTpl(
+					this.templatePath('src/utils/directiveResolvers.js'),
+					this.destinationPath('src/utils/' + currentTypeName.toLocaleLowerCase() + 'DirectiveResolvers.js'),
+					{
+						dirNames : directiveNames
 					}
 				)
 
