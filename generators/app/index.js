@@ -452,6 +452,40 @@ module.exports = class extends Generator {
 				appName: this.appName
 			}
 		)
+		const pkgJson = {
+			dependencies: {
+				"@emotion/react": "^11.4.1",
+				"@emotion/styled": "^11.3.0",
+				"@material-ui/core": "^4.12.3",
+				"@mui/material": "^5.0.1",
+				"@testing-library/react": "^9.3.2",
+				"@testing-library/user-event": "^7.1.2",
+				"amazon-cognito-auth-js": "^1.3.3",
+				"amazon-cognito-identity-js": "^5.1.1",
+				"bootstrap": "^5.1.1",
+				"graphql": "^15.6.0",
+				"material-table": "^1.69.3",
+				"react": "^17.0.2",
+				"react-bootstrap": "^1.6.3",
+				"react-calendar": "^3.4.0",
+				"react-color": "^2.19.3",
+				"react-deploy-cli": "0.0.17",
+				"react-dom": "^17.0.2",
+				"react-material-ui-form-validator": "^3.0.0",
+				"react-redux": "^7.2.5",
+				"react-router-bootstrap": "^0.25.0",
+				"react-router-dom": "^5.3.0",
+				"react-scripts": "3.4.3",
+				"react-table": "^7.7.0",
+				"react-toastify": "^8.0.2",
+				"redux": "^4.1.1",
+				"redux-logger": "^3.0.6",
+				"redux-persist": "^6.0.0",
+				"redux-thunk": "^2.3.0"
+			  
+			}
+		  }
+		this.fs.extendJSON(this.destinationPath('package.json'), pkgJson)
 	}
 
 	// Where conflicts are handled (used internally)
@@ -463,7 +497,7 @@ module.exports = class extends Generator {
 	install() {
 		this.log("Install")
 		// Npm install, essential modules
-		this.npmInstall(['graphql', 'react-redux', 'react-table', 'redux', 'redux-thunk', 'redux-logger', 'redux-persist', 'react-router-dom', 'material-table@1.54.2', '@material-ui/core', 'bootstrap', 'react-material-ui-form-validator', 'react-calendar', 'react-toastify', 'react-bootstrap', 'bootstrap', 'react-color', 'amazon-cognito-auth-js', 'amazon-cognito-identity-js', 'react-router-bootstrap', 'react-deploy-cli'])
+		this.npmInstall()
 	}
 
 	// Called last, cleanup, say good bye, etc
