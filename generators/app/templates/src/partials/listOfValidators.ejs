@@ -28,7 +28,7 @@
 
             <Calendar
                 onChange={e => this.onChangeDate(e, "<%- field.name %>") }
-                value={this.state.${field.name} ? new Date(this.state.<%- field.name %>) : null}
+                value={this.state.<%-field.name%> ? new Date(this.state.<%- field.name %>) : null}
             />
             <br/>
                 <%_ break
@@ -41,7 +41,7 @@
                 <p><b><%- field.name %></b></p>
                 <div style={{display: "flex", justifyContent: "center"}}>
                 <ChromePicker
-                    color={this.state.${field.name}}
+                    color={this.state.<%-field.name%>}
                     onChange = {(e) => this.onChangeColor(e, "<%- field.name %>", "<%- field.type %>")}
                 />
                 </div>
