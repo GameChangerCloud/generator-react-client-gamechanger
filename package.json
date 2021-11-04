@@ -1,6 +1,6 @@
 {
   "name": "generator-react-client-gamechanger",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Generator based on Yeoman that scaffolds the basic Redux logic in a React project based on a graphQL schema.",
   "main": "index.js",
   "scripts": {

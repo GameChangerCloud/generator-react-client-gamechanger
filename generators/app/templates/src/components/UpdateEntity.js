@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
 import { ValidatorForm, TextValidator, SelectValidator } from 'react-material-ui-form-validator';
+import {ChromePicker} from 'react-color'
 import Button from "@material-ui/core/Button";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
