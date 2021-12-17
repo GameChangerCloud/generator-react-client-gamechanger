@@ -1,0 +1,5 @@
+<% type.fields.forEach(field => { _%>
+    <%_ if (field.type === "RGBA") { _%>
+        this.state.<%-field.name%> =  `rgba(${this.state.<%-field.name%>.r}, ${this.state.<%-field.name%>.g}, ${this.state.<%-field.name%>.b}, ${this.state.<%-field.name%>.a})`
+    <%_ } _%>
+<% }) _%>

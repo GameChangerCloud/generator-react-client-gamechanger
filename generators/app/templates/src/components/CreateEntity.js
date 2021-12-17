@@ -82,6 +82,7 @@ class Create<%-typeName%> extends Component{
         let change = {}
         // TODO
         // CREATE REQUEST
+        <%- include('../partials/resolveForQuery.ejs',{type: currentType, scalars: scalars}) _%>
         this.onAdd(this.state)
         change["redirect"] = "/<%-typeNamePlural%>"
         toast("Create !");

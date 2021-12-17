@@ -28,7 +28,7 @@ export const create<%- typesName[index] _%> = (<%- typeNameLowerCase _%>) => { <
         <%_ }) %> 
         return "mutation {<%- typeNameLowerCase _%>Create( <%_ fields.forEach(field => { _%>
             <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { _%>    
-                <%_ if (field.type === "String") { _%> <%- field.name _%>: \"" + <%- typeNameLowerCase _%>.<%- field.name _%>+ "\", <%_ } else { _%>
+                <%_ if (field.type === "String" || field.type === "RGBA" || field.type === "RGB") { _%> <%- field.name _%>: \"" + <%- typeNameLowerCase _%>.<%- field.name _%>+ "\", <%_ } else { _%>
                     <%_ if(field.type === "DateTime") { _%> <%- field.name _%>: \"" + (<%- typeNameLowerCase _%>.<%- field.name _%> ? new Date(<%- typeNameLowerCase _%>.<%- field.name _%>).toISOString(): null) + "\", 
                     <%_ } else { _%> <%- field.name _%>: " + <%- typeNameLowerCase  _%>.<%- field.name _%> + ", <%_ } _%>
                 <%_ } _%> 
@@ -53,7 +53,7 @@ export const update<%- typesName[index] _%> = (<%- typeNameLowerCase _%>) => { <
         <%_ }) %> 
         return "mutation {<%- typeNameLowerCase _%>Update( <%_ fields.forEach(field => { _%>
             <%_ if (field.type === "ID" || field.type === "String" || field.type === "Int" || field.type === "Boolean" || scalarsName.includes(field.type)) { _%>
-                <%_ if (field.type === "String") { _%>  <%- field.name _%>: \"" + <%- typeNameLowerCase _%>.<%- field.name _%> + "\", <%_ } else { _%>
+                <%_ if (field.type === "String" || field.type === "RGBA" || field.type === "RGB") { _%>  <%- field.name _%>: \"" + <%- typeNameLowerCase _%>.<%- field.name _%> + "\", <%_ } else { _%>
                     <%_ if(field.type === "DateTime") { _%> <%- field.name _%>: \"" + (<%- typeNameLowerCase _%>.<%- field.name _%> ? new Date(<%- typeNameLowerCase _%>.<%- field.name _%>).toISOString(): null) + "\",
                     <%_ } else { _%> <%- field.name _%>: " + <%- typeNameLowerCase _%>.<%- field.name _%> + ", <%_ } _%>
                 <%_ } _%>
