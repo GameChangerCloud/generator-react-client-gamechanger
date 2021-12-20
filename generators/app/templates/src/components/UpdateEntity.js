@@ -71,6 +71,7 @@ class Update<%-typeName%> extends Component{
         let change = {}
         // TODO
         // UPDATE REQUEST
+        <%- include('../partials/resolveForQuery.ejs',{type: currentType, scalars: scalars}) _%>
         this.onUpdate(this.state)
         change["redirect"] = "/<%-typeNamePlural%>"
         toast("Update !");
