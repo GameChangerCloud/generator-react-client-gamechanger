@@ -99,7 +99,7 @@
                 <%- help %>
                 style={{ width: 500 }}
             >
-                {this.getAll<%- field.name %>().map((field, id) => <option key={id} value={id}>
+                {this.getAll<%- field.name %>().map((field, id) => <option key={id} value={field.id}>
             {<%for(index = 0 ; index < selectorResult.length ; index ++){%>
                 field.<%-selectorResult[index]%>
                 <%_if (index <= selectorResult.length - 2){_%>
