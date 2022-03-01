@@ -10,23 +10,50 @@ variable "bucket_name_staging" {
 
 resource "aws_s3_bucket" "production" {
   bucket = var.bucket_name_production
-  acl    = "public-read"
   force_destroy = true
 
-  website {
-    index_document = "index.html"
-    error_document = "index.html"
+}
+
+resource "aws_s3_bucket_website_configuration" "production" {
+  bucket = aws_s3_bucket.production.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "index.html"
   }
 }
+
+resource "aws_s3_bucket_acl" "production" {
+  bucket = aws_s3_bucket.production.id
+  acl    = "public-read"
+  
+}
+
 resource "aws_s3_bucket" "staging" {
   bucket = var.bucket_name_staging
-  acl    = "public-read"
   force_destroy = true
 
-  website {
-    index_document = "index.html"
-    error_document = "index.html"
+}
+
+resource "aws_s3_bucket_website_configuration" "staging" {
+  bucket = aws_s3_bucket.staging.id
+
+  index_document {
+    suffix = "index.html"
   }
+
+  error_document {
+    key = "index.html"
+  }
+}
+
+resource "aws_s3_bucket_acl" "staging" {
+  bucket = aws_s3_bucket.staging.id
+  acl    = "public-read"
+  
 }
 
 resource "aws_s3_bucket_policy" "prod_policy" {
@@ -73,7 +100,7 @@ locals {
 
 resource "aws_cloudfront_distribution" "s3_distribution_production" {
   origin {
-    domain_name = element(split("/",aws_s3_bucket.production.website_endpoint),2)
+    domain_name = element(split("/",aws_s3_bucket_website_configuration.production.website_endpoint),2)
     origin_id   = local.s3_origin_id
 
     custom_origin_config {
@@ -129,7 +156,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_production" {
 
 resource "aws_cloudfront_distribution" "s3_distribution_staging" {
   origin {
-    domain_name = element(split("/",aws_s3_bucket.staging.website_endpoint),2)
+    domain_name = element(split("/",aws_s3_bucket_website_configuration.staging.website_endpoint),2)
     origin_id   = local.s3_origin_id
 
     custom_origin_config {
