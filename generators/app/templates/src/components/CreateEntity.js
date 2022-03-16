@@ -90,6 +90,13 @@ class Create<%-typeName%> extends Component{
         this.setState(change)
     }
 
+    handleCancel(e){
+        let change = {}
+        change["redirect"] = "/<%-typeNamePlural%>"
+        toast("Cancelled !");
+        this.setState(change)
+    }
+
     isPresent(name, field){
         if(!this.state[field])
             return false
@@ -129,6 +136,7 @@ class Create<%-typeName%> extends Component{
             
             <%- include('../partials/listOfValidators.ejs',{type: currentType, scalars: scalars, types: types, directives: directives}) _%>
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: 15 }}>Create</Button>
+        <Button onClick={(e) => this.handleCancel(e)} color="primary" style={{ marginTop: 15 }}>Cancel</Button>
         </ValidatorForm>
         </div>
     );
