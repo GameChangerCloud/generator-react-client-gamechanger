@@ -1,11 +1,11 @@
 const Generator = require('yeoman-generator');
 const pluralize = require('pluralize')
-const parsing = require('./parsing')
-const easygraphqlSchemaParser = require('easygraphql-parser-gamechanger')
+const easyGraphqlSchemaParser = require('easygraphql-parser-gamechanger')
+const parsing = easyGraphqlSchemaParser.utils.parsing;
 const inflection = require('inflection')
 const fs = require('fs')
 const constants = require('./constants');
-const directives = require('./templates/src/utils/schemaDirectives')
+const directives = easyGraphqlSchemaParser.utils
 
 const isFileSync = (aFile) => {
 	try {
@@ -62,7 +62,7 @@ module.exports = class extends Generator {
 				}
 
 				// Parsing as a JSON object
-				this.schemaJSON = easygraphqlSchemaParser(this.schema)
+				this.schemaJSON = easyGraphqlSchemaParser.schemaParser(this.schema)
 			}
 			else {
 				throw new Error("Invalid graphql file")
