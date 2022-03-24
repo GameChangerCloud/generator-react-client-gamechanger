@@ -5,7 +5,7 @@ const parsing = easyGraphqlSchemaParser.utils.parsing;
 const inflection = require('inflection')
 const fs = require('fs')
 const constants = require('./constants');
-const directives = easyGraphqlSchemaParser.utils
+const directives = easyGraphqlSchemaParser.utils.schemaDirectives;
 
 const isFileSync = (aFile) => {
 	try {
@@ -18,7 +18,6 @@ const isFileSync = (aFile) => {
 		}
 	}
 }
-
 
 module.exports = class extends Generator {
 
@@ -88,6 +87,9 @@ module.exports = class extends Generator {
 		this.types = parsing.getAllTypes(this.schemaJSON)
 		this.typesName = parsing.getAllTypesName(this.schemaJSON)
 
+		console.log("typesName : ", this.typesName)
+		console.log("types : ", this.types)
+
 		// All the scalars declaration in schema
 		this.scalars = []
 		this.types.forEach((type, index) => {
@@ -134,7 +136,7 @@ module.exports = class extends Generator {
 			this.templatePath('src/constants/queries.js'),
 			this.destinationPath('src/constants/queries.js'),
 			{
-				typesName:this.typesName,
+				typesName: this.typesName,
 				types: this.types,
 				scalars: this.scalars,
 				pluralize: pluralize
@@ -146,7 +148,7 @@ module.exports = class extends Generator {
 			this.templatePath('src/constants/index.js'),
 			this.destinationPath('src/constants/index.js'),
 		)
-			
+
 		// src/store/configureStore.js
 		this.fs.copyTpl(
 			this.templatePath('src/store/configureStore.js'),
@@ -199,8 +201,8 @@ module.exports = class extends Generator {
 			// Fetch all the fields for one type
 			let fields = parsing.getFields(currentType)
 
-			let directiveNames = parsing.getFieldsDirectiveNames(fields , this.types[index])
-			let schemaDirectives = parsing.getschemaDirectivesNames()
+			let directiveNames = parsing.getFieldsDirectiveNames(fields, this.types[index])
+			let schemaDirectives = parsing.getSchemaDirectivesNames()
 
 
 			if (currentTypeName !== "Query" && currentTypeName !== "Mutation" && !this.scalars.includes(currentTypeName)) {
@@ -213,7 +215,7 @@ module.exports = class extends Generator {
 						typeName: currentTypeName,
 						typeNameLowerPlural: lowerPluralName,
 						typeNamePlural: pluralName,
-						currentType: currentType, 
+						currentType: currentType,
 						scalars: this.scalars,
 						inflection: inflection,
 					}
@@ -226,12 +228,12 @@ module.exports = class extends Generator {
 					{
 						typeName: currentTypeName,
 						typeNamePlural: pluralName,
-						currentType: currentType, 
+						currentType: currentType,
 						scalars: this.scalars,
 						pluralize: pluralize,
-						directiveNames : directiveNames,
-						fields : fields,
-						types : this.types,
+						directiveNames: directiveNames,
+						fields: fields,
+						types: this.types,
 						directives: directives
 					}
 				)
@@ -243,12 +245,12 @@ module.exports = class extends Generator {
 					{
 						typeName: currentTypeName,
 						typeNamePlural: pluralName,
-						currentType: currentType, 
+						currentType: currentType,
 						scalars: this.scalars,
 						pluralize: pluralize,
-						directiveNames : directiveNames,
-						fields : fields,
-						types : this.types,
+						directiveNames: directiveNames,
+						fields: fields,
+						types: this.types,
 						directives: directives
 					}
 				)
@@ -309,13 +311,11 @@ module.exports = class extends Generator {
 					this.templatePath('src/utils/directiveResolvers.js'),
 					this.destinationPath('src/utils/' + currentTypeName.toLocaleLowerCase() + 'DirectiveResolvers.js'),
 					{
-						dirNames : directiveNames,
-						schemaDirectives : schemaDirectives
+						dirNames: directiveNames,
+						schemaDirectives: schemaDirectives
 
 					}
 				)
-
-
 			}
 		}
 
@@ -383,13 +383,13 @@ module.exports = class extends Generator {
 			this.templatePath('src/App.js'),
 			this.destinationPath('src/App.js'),
 			{
-				typesName : this.typesName,
+				typesName: this.typesName,
 				scalars: this.scalars,
 				pluralize: pluralize,
 			}
 		)
 
-		
+
 
 		// src/components/Callback.js
 		this.fs.copyTpl(
@@ -482,9 +482,8 @@ module.exports = class extends Generator {
 				"redux-logger": "^3.0.6",
 				"redux-persist": "^6.0.0",
 				"redux-thunk": "^2.3.0"
-			  
 			}
-		  }
+		}
 		this.fs.extendJSON(this.destinationPath('package.json'), pkgJson)
 	}
 
