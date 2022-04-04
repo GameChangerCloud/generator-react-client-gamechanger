@@ -61,7 +61,7 @@
                 <%_ break
         } _%>
     <%_ } else { _%>
-        <%const selectorResult = directives.directives.selector.resolve(field, types)%>
+        <%const selectorResult = directives.selector.resolve(field, types)%>
         <%_ if (field.isArray) { _%>
             <%- field.name %> : <% if (field.noNull) { _%>
                 (Not null)
