@@ -1,5 +1,5 @@
 const {
-    scalars,
+    Scalars,
     schemaParser,
     directives,
     getAllTypesName,
@@ -48,9 +48,9 @@ module.exports = class extends Generator {
     configuring() {
         this.log("Configuring")
         this.defaultScalars = []
-        for (const scalarName in scalars) {
-            if (scalars.hasOwnProperty(scalarName)) {
-                this.defaultScalars.push(scalars[scalarName])
+        for (const scalarName in Scalars) {
+            if (Scalars.hasOwnProperty(scalarName)) {
+                this.defaultScalars.push(Scalars[scalarName])
             }
         }
     }
