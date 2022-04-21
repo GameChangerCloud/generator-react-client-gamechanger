@@ -5,7 +5,6 @@ const {
     getAllTypesName,
     getTypesExceptQueries,
     getFieldsDirectiveNames,
-    getFields,
     getDirectivesNames
 } = require("easygraphql-parser-gamechanger")
 
@@ -202,7 +201,7 @@ module.exports = class extends Generator {
             let lowerPluralName = pluralize.plural(lowerName)
 
             // Fetch all the fields for one type
-            let fields = getFields(currentType)
+            let fields = currentType.fields
 
             let directiveNames = getFieldsDirectiveNames(this.types[index])
             let schemaDirectives = getDirectivesNames()
